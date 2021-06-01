@@ -1,0 +1,25 @@
+{
+  "name": "erc721-nft",
+  "version": "1.0.0",
+  "description": "",
+  "main": "truffle-config.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Hiutaky/ERC721-NFT-BSC-TEST.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Hiutaky/ERC721-NFT-BSC-TEST/issues"
+  },
+  "homepage": "https://github.com/Hiutaky/ERC721-NFT-BSC-TEST#readme",
+  "dependencies": {
+    "@openzeppelin/contracts": "^4.1.0"
+  }
+}

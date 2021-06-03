@@ -4,6 +4,7 @@ import React, { Component } from 'react';
 import UserNFT from './components/userNFT';
 import MintNFT from './components/mintNFT';
 import GetNFTMeta from './components/getNFTmeta';
+import PrintLastNFT from './components/printLastNFT';
 
 
 class App extends Component {
@@ -51,6 +52,12 @@ class App extends Component {
             drizzle={this.props.drizzle}
             drizzleState={this.state.drizzleState}
           />
+        </div>
+        <div className="loop"> 
+            <PrintLastNFT 
+            drizzle={this.props.drizzle}
+            drizzleState={this.state.drizzleState}
+            />
         </div>
 
       </div>

@@ -11,13 +11,15 @@ class GetNFTMeta extends Component {
             imageHash: null,
             age: null,
             description: '',
-            imageHash: '',
+            imageHash: null,
             position: '',
             title: null
         };
 
         this.handleSearch = this.handleSearch.bind(this);
         this.handleChange = this.handleChange.bind(this);
+
+        this.tokenId = React.createRef();
         //this.handleHashChange = this.handleHashChange.bind(this);
     }
 
@@ -25,7 +27,6 @@ class GetNFTMeta extends Component {
         const value = e.target.value;
 
         this.setState( { tokenId: value });
-        console.log( this.state.tokenId );
     }
 
     prepareHash = async (tokenId, user, contract) => {
@@ -41,13 +42,12 @@ class GetNFTMeta extends Component {
         const {drizzle, drizzleState} = this.props;
         const contract = drizzle.contracts.NFTmint;
         const user = drizzleState.accounts[0];
-        const tokenId = this.state.tokenId;
+        const tokenId =  this.tokenId.current.value;
         const { NFTmint } = drizzleState.contracts;
-        console.log(tokenId);
+
 
         const ipfsHash = await this.prepareHash(tokenId, user, contract);
 
-        console.log(ipfsHash)
         this.setState( { ipfsHash });
         
         const lastipfsHash = await NFTmint.tokenURI[this.state.ipfsHash];
@@ -95,7 +95,7 @@ class GetNFTMeta extends Component {
                 <form onSubmit={this.handleSearch} className="searchMeta">
                     <label>
                         Search by Token ID:
-                        <input type="text" name="tokenId" onChange={this.handleChange} />
+                        <input type="text" name="tokenId" ref={this.tokenId} onChange={this.handleChange} />
                     </label>
                     <input type="submit" className="submitButton" value="Search NFT Meta" />
                 </form>

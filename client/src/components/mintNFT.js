@@ -133,9 +133,8 @@ class MintNFT extends Component {
     render() {
         return (
             <div className="column">
-                <h2>Mint a NEW Opera</h2>
                 <form onSubmit={this.MintNFT} className="mintForm">
-
+                <h2>Mint a NEW Opera</h2>
                     <label>
                         Mint to Address:
                         <input type="text" name="address" value={this.state.address} onChange={this.handleAddressChange} required />

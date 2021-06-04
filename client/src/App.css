@@ -1,5 +1,7 @@
 .App {
   text-align: center;
+  
+  background: rgb(252, 252, 252);
 }
 
 .App-logo {
@@ -37,6 +39,13 @@
   }
 }
 
+.header{
+  padding: 10px 0px;
+  color: #333;
+  border-bottom: 1px solid rgb(229, 232, 235);
+  box-shadow: rgb(14 14 14 / 25%) 0px 0px 8px 0px;
+}
+
 .main{
   display: flex;
   width: 1240px;
@@ -53,12 +62,14 @@ label > input, label > select{
   margin-top: 5px;
   padding: 7px 15px;
   border: 2px solid rgb(197, 197, 197);
+  border-radius: 3px;
 }
 
 .column {
   width: 50%;
   text-align: left;
-  padding: 10px 10px;
+  padding: 25px 20px;
+  margin: 15px;
 }
 
 .nft-image{
@@ -69,9 +80,11 @@ label > input, label > select{
 .column > form{
   display: flex;
   flex-direction: column;
-  padding: 25px 10px;
-  background: #111;
-  color: #fff;
+  padding: 25px 30px;
+  background: hsl(240deg 7% 97%);
+  color: #555;
+  font-weight: 500;
+  border-radius: 5px;
 }
 
 .submitButton{
@@ -79,12 +92,6 @@ label > input, label > select{
   color: #000;
   font-size: 22px;
   padding: 15px 20px;
-}
-
-.userInfo{
-  padding: 10px;
-  background: #000;
-  color: #fff;
 }
 
 .searchMeta{

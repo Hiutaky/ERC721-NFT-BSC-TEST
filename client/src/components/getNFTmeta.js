@@ -23,10 +23,12 @@ class GetNFTMeta extends Component {
         //this.handleHashChange = this.handleHashChange.bind(this);
     }
 
-    handleChange = e => {
-        const value = e.target.value;
+    handleChange = async e => {
+        const tokenId = e.target.value;
 
-        this.setState( { tokenId: value });
+        
+        this.setState( { tokenId });
+        console.log( this.state.tokenId )
     }
 
     prepareHash = async (tokenId, user, contract) => {
@@ -39,18 +41,18 @@ class GetNFTMeta extends Component {
 
     handleSearch = async event => {
         event.preventDefault();
+
         const {drizzle, drizzleState} = this.props;
         const contract = drizzle.contracts.NFTmint;
         const user = drizzleState.accounts[0];
         const tokenId =  this.tokenId.current.value;
         const { NFTmint } = drizzleState.contracts;
 
-
         const ipfsHash = await this.prepareHash(tokenId, user, contract);
 
         this.setState( { ipfsHash });
-        
-        const lastipfsHash = await NFTmint.tokenURI[this.state.ipfsHash];
+
+        const lastipfsHash = await NFTmint.tokenURI[ipfsHash];
 
         if( lastipfsHash && lastipfsHash.value){
             fetch('https://ipfs.io/ipfs/' + lastipfsHash.value)
@@ -95,7 +97,7 @@ class GetNFTMeta extends Component {
                 <form onSubmit={this.handleSearch} className="searchMeta">
                     <label>
                         Search by Token ID:
-                        <input type="text" name="tokenId" ref={this.tokenId} onChange={this.handleChange} />
+                        <input type="text" name="tokenId" ref={this.tokenId} />
                     </label>
                     <input type="submit" className="submitButton" value="Search NFT Meta" />
                 </form>

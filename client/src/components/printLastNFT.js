@@ -1,4 +1,4 @@
-import React, {Component} from 'react'
+import React, {Component, useEffect} from 'react'
 
 /**
  * 
@@ -12,70 +12,76 @@ class PrintLastNFT extends Component {
         super(props);
 
         this.state = {
-            currentCount: null
+            totalSupply: null
         };
 
-        //this.handleHashChange = this.handleHashChange.bind(this);
     }
 
-    prepareCountHash = () => {
-        const {drizzle, drizzleState} = this.props
-        const contract = drizzle.contracts.NFTmint
-
-        //if( ! drizzleState ) return null
-        const user = drizzleState.accounts[0]
-
-        const currentCount = contract.methods["totalVNFSupply"].cacheCall( {
+    prepareHash = async (tokenId, user, contract) => {
+        const ipfsHash = contract.methods["tokenURI"].cacheCall(tokenId, {
             from: user
-        })
-        
-        console.log(currentCount)
-        return currentCount
-        //this.setState( { currentCount })
+        });
+
+        return ipfsHash;
     }
 
-    printLast = () => {
-        
-        const {drizzle, drizzleState} = this.props
-        const contract = drizzle.contracts.NFTmint
-        const user = drizzleState.accounts[0]
-        const { NFTmint } = drizzleState.contracts
-        const countHash = this.prepareCountHash()
-        //const count = await NFTmint.totalVNFSupply[countHash]
-        console.log(countHash)
+    fetchSupply = async () => {
+        const {drizzle, drizzleState} = this.props;
+        const contract = drizzle.contracts.NFTmint;
+        const user = drizzleState.accounts[0];
+        const { NFTmint } = this.props.drizzleState.contracts;
+        const totalSupplyTX = await contract.methods["totalSupply"].cacheCall({
+            from: user
+        });
+        const newTotalSupply = await NFTmint.totalSupply[totalSupplyTX];
+        console.log(newTotalSupply)
+        const supply = newTotalSupply.value 
+        this.setState({ totalSupply: newTotalSupply.value })
+    }
 
-        const hashes = []
-        /*for( let i = count-n; i < count; i++){
-            hashes[i] = await contract.methods["tokenURI"].cacheCall(i, {
-                from: user
-            })
-        }*/
-        /*console.log( hashes )
-        return
-        const operas = []
-        for( let hash in hashes){
-            const ipfsHash = await NFTmint.tokenURI[hash];
-            if( ipfsHash && ipfsHash.value){
-                fetch('https://ipfs.io/ipfs/' + ipfsHash.value)
+    handleSearch = async () => {
+        const {drizzle, drizzleState} = this.props;
+        console.log(drizzle)
+        const contract = drizzle.contracts.NFTmint;
+        const user = drizzleState.accounts[0];
+        const { NFTmint } = this.props.drizzleState.contracts;
+        this.fetchSupply()
+        console.log(this.state.totalSupply)
+
+        /*const supply = 0
+        for( let i = 1; i === supply; i++){
+            console.log(i)
+            const ipfsHash = await this.prepareHash(i, user, contract)
+            console.log(NFTmint)
+            const lastipfsHash = await NFTmint.tokenURI[ipfsHash]
+
+            if( lastipfsHash && lastipfsHash.value){
+                const result = await fetch('https://ipfs.io/ipfs/' + lastipfsHash.value)
                 .then(response => response.json())
                 .then( (data) => {
-                    operas[hash] = data
+                    return (data)
                 })
-            } 
-            console.log( operas );
-        }
-        return operas*/
-        return (
-            <div>
+                console.log(result)
+            }
+        }*/
 
-            </div>
-        )
     }
 
+    getIPFSImageHash = () => {
+        
+        const {drizzle, drizzleState} = this.props;
+        if( ! this.state.totalSupply ) return null;
+
+        return 'Image IPFS Hash: ' + this.state.imageHash;
+    }
+
+
     render() {
+        
+        const {drizzle, drizzleState} = this.props;
         return (
             <div>
-               asdasdsa
+                { drizzleState.drizzleStatus.initialized ? this.getIPFSImageHash() : ''}
             </div>
         )
     }

@@ -24,8 +24,7 @@ class UserNFT extends Component {
         
         const balanceOf = NFTmint.balanceOf[this.state.balanceOf];
         
-        console.log( drizzleState );
-        return <div className="userInfo">Current user: <b>{ user }</b> NFT count: { balanceOf && balanceOf.value }</div>
+        return <div className="userInfo">Contract Address: {NFTmint.address} Current user: <b>{ user }</b> NFT count: { balanceOf && balanceOf.value }</div>
     }
 }
 

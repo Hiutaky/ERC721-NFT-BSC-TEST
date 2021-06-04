@@ -12,7 +12,7 @@ const options = {
   web: {
     fallback: {
       type: "ws",
-      url: "ws://127.0.0.1:9545"
+      url: "https://data-seed-prebsc-1-s1.binance.org:8545"
     }
   }
 }

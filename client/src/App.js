@@ -27,6 +27,7 @@ class App extends Component {
         this.setState({ loading: false, drizzleState });
       }
     });
+
   }
 
   componentWillUnmount() {

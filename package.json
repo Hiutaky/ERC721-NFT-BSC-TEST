@@ -7,6 +7,7 @@
     "test": "test"
   },
   "scripts": {
+    "start": "cd client && npm start",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

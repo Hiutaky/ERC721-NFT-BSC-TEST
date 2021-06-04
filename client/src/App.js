@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.loading) return "Loading Drizzle...";
+    if (this.state.loading) return "Loading Venafrum NFT...";
     return (
       <div className="App">
         <div className="header">

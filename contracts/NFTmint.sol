@@ -56,6 +56,7 @@ contract NFTmint is ERC721Enumerable {
     //mint a new NFT based on VNF ERC721
     function mintOpera(address player, string memory tokenURI)
         public
+        onlyOwner
         returns (uint256)
     {
         _tokenIds.increment();
